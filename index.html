@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Processing Mobile by pzp1997</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Processing Mobile</h1>
+      <h2 class="project-tagline">Makes Processing.js more mobile friendly.</h2>
+      <a href="https://github.com/pzp1997/Processing-Mobile" class="btn">View on GitHub</a>
+      <a href="https://github.com/pzp1997/Processing-Mobile/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/pzp1997/Processing-Mobile/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h2>
+<a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting Started</h2>
+
+<h3>
+<a id="short-answer" class="anchor" href="#short-answer" aria-hidden="true"><span class="octicon octicon-link"></span></a>Short answer:</h3>
+
+<p>Just add <code>&lt;script src="http://pzp1997.github.io/cdn/processing-mobile/processing-mobile-1.0.0.js"&gt;&lt;/script&gt;</code> to the bottom of the <code>&lt;body&gt;</code> in your index.html!</p>
+
+<h3>
+<a id="long-answer" class="anchor" href="#long-answer" aria-hidden="true"><span class="octicon octicon-link"></span></a>Long answer:</h3>
+
+<p><strong>Making the HTML file</strong></p>
+
+<ol>
+<li>Copy and paste the <a href="https://gist.github.com/pzp1997/958e15fe7bf048de0b10">HTML Template</a> into your favorite text editor. (If you do not have a text editor, I strongly recommend <a href="https://atom.io">Atom</a>).</li>
+<li>Replace <code>&lt;!-- NAME OF YOUR PROCESSING SKETCH GOES HERE --&gt;</code> with the name of your Processing sketch.</li>
+<li>Copy and paste your Processing sketch below the line <code>// YOUR PROCESSING CODE GOES HERE</code>.</li>
+<li>Save this file as <code>[name of your sketch].html</code>.</li>
+</ol>
+
+<p><strong>Hosting the HTML file</strong></p>
+
+<ol>
+<li>Go to <a href="https://drive.google.com">Google Drive</a>.</li>
+<li>Click on the <strong>New</strong> button on the left.</li>
+<li>Click on <strong>File Upload</strong> from the dropdown menu and choose the file you saved in Step 4 of Making the HTML file.</li>
+<li>Wait for the upload to complete, then click on the <strong>Share</strong> link in the bottom left.</li>
+<li>Click <strong>Advanced</strong> in the bottom right corner of the sharing box.</li>
+<li>Click <strong>Change...</strong>.</li>
+<li>Choose <strong>On - Public on the web</strong> and click <strong>Save</strong>.</li>
+<li>Before closing the sharing box, copy the document ID from the URL in the field below "Link to share". The document ID is a string of uppercase and lowercase letters and numbers between slashes in the URL.</li>
+<li>You can now access your sketch at <code>www.googledrive.com/host/[doc id]</code> where <code>[doc id]</code> is the document ID you copied in Step 8.</li>
+</ol>
+
+<p><strong>Shortening the URL (Optional)</strong></p>
+
+<ol>
+<li>Go to <a href="https://bitly.com">bitly.com</a>
+</li>
+<li>Paste the URL from Step 9 of Hosting the HTML file.</li>
+<li>Copy and share the shortened URL with your friends!</li>
+</ol>
+
+<h2>
+<a id="documentation" class="anchor" href="#documentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Documentation</h2>
+
+<h3>
+<a id="touch-events" class="anchor" href="#touch-events" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://developer.mozilla.org/en-US/docs/Web/API/Touch_events">Touch Events</a>
+</h3>
+
+<h6>
+<a id="touchx" class="anchor" href="#touchx" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>touchX</code>
+</h6>
+
+<p>type: <code>float</code><br>
+value: <code>0</code> to <code>width</code><br>
+x-coordinate of the last touch.</p>
+
+<h6>
+<a id="touchy" class="anchor" href="#touchy" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>touchY</code>
+</h6>
+
+<p>type: <code>float</code><br>
+value: <code>0</code> to <code>height</code><br>
+y-coordinate of the last touch.</p>
+
+<h6>
+<a id="touches" class="anchor" href="#touches" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>touches</code>
+</h6>
+
+<p>type <code>array</code><br>
+Each object in the array has the following properties:<br></p>
+
+<ul>
+<li>
+<code>x</code><br>
+type: <code>float</code><br>
+value: <code>0</code> to <code>width</code><br>
+x-coordinate of touch<br>
+</li>
+<li>
+<code>y</code><br>
+type: <code>float</code><br>
+value: <code>0</code> to <code>height</code><br>
+y-coordinate of touch<br>
+</li>
+<li>
+<code>id</code><br>
+type: <code>int</code><br>
+Unique id of the touch. Allows one to track a specific finger while it is on the screen.</li>
+</ul>
+
+<h6>
+<a id="touch" class="anchor" href="#touch" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>touch</code>
+</h6>
+
+<p>type: <code>boolean</code><br>
+value: <code>false</code> until the first Touch Event, <code>true</code> after that.<br>
+Useful for checking if a device supports touch and setting up a fallback if it does not.</p>
+
+<h3>
+<a id="device-orientation" class="anchor" href="#device-orientation" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://developer.mozilla.org/en-US/docs/Web/API/Detecting_device_orientation">Device Orientation</a>
+</h3>
+
+<h6>
+<a id="tiltx" class="anchor" href="#tiltx" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>tiltX</code>
+</h6>
+
+<p>type: <code>float</code><br>
+value: <code>0</code> to <code>360</code><br>
+Rotation about the x-axis.</p>
+
+<h6>
+<a id="tilty" class="anchor" href="#tilty" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>tiltY</code>
+</h6>
+
+<p>type: <code>float</code><br>
+value: <code>0</code> to <code>360</code><br>
+Rotation about the y-axis.</p>
+
+<h6>
+<a id="tiltz" class="anchor" href="#tiltz" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>tiltZ</code>
+</h6>
+
+<p>type: <code>float</code><br>
+value: <code>0</code> to <code>360</code><br>
+Rotation about the z-axis.</p>
+
+<h6>
+<a id="tilt" class="anchor" href="#tilt" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>tilt</code>
+</h6>
+
+<p>type: <code>boolean</code><br>
+value: <code>false</code> until the first Device Orientation Event, <code>true</code> after that.<br>
+Useful for checking if a device supports orientation and setting up a fallback if it does not.</p>
+
+<h2>
+<a id="examples" class="anchor" href="#examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Examples</h2>
+
+<ul>
+<li><a href="pzp1997.github.io/Processing-Mobile/examples/bg-tilt">Background Tilt</a></li>
+<li><a href="pzp1997.github.io/Processing-Mobile/examples/easing">Easing</a></li>
+<li><a href="pzp1997.github.io/Processing-Mobile/examples/multitouch">Multitouch</a></li>
+<li>
+<a href="pzp1997.github.io/Processing-Mobile/examples/">THE-SUN</a>
+
+<ul>
+<li>Based off <a href="https://github.com/eveka/the-sun">eveka's code</a>
+</li>
+</ul>
+</li>
+</ul>
+
+<h2>
+<a id="bug-reports-improvements" class="anchor" href="#bug-reports-improvements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bug Reports? Improvements?</h2>
+
+<p>Open a <a href="https://github.com/pzp1997/ProcessingJS-Touch/issues/new">New Issue</a> on the GitHub repository. Make sure the report has a detailed description of the bug, including how it can be reproduced.</p>
+
+<p><code>||</code></p>
+
+<p>Fork this repository and submit a pull request with a fix.</p>
+
+<p><code>||</code></p>
+
+<p>Just drop me a line at <a href="mailto:pzpaul2002@yahoo.com?subject=Processing%20Mobile%20Bug">pzpaul2002@yahoo.com</a> with the subject "Processing Mobile Bug" and a detailed description of the bug, including how I can reproduce it.</p>
+
+<h2>
+<a id="authors" class="anchor" href="#authors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authors</h2>
+
+<p><a href="https://github.com/pzp1997">Palmer (pzp1997)</a></p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/pzp1997/Processing-Mobile">Processing Mobile</a> is maintained by <a href="https://github.com/pzp1997">pzp1997</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-63015955-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
+
