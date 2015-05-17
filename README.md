@@ -87,10 +87,10 @@ value: ``false`` until the first Device Orientation Event, ``true`` after that.<
 Useful for checking if a device supports orientation and setting up a fallback if it does not.
 
 ## Examples
- - [Background Tilt](pzp1997.github.io/Processing-Mobile/examples/bg-tilt)
- - [Easing](pzp1997.github.io/Processing-Mobile/examples/easing)
- - [Multitouch](pzp1997.github.io/Processing-Mobile/examples/multitouch)
- - [THE-SUN](pzp1997.github.io/Processing-Mobile/examples/)
+ - [Background Tilt](https://pzp1997.github.io/Processing-Mobile/examples/bg-tilt)
+ - [Easing](https://pzp1997.github.io/Processing-Mobile/examples/easing)
+ - [Multitouch](https://pzp1997.github.io/Processing-Mobile/examples/multitouch)
+ - [THE-SUN](https://pzp1997.github.io/Processing-Mobile/examples/)
    - Based off [eveka's code](https://github.com/eveka/the-sun)
 
 ## Bug Reports? Improvements?
