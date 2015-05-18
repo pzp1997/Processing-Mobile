@@ -90,7 +90,7 @@ Useful for checking if a device supports orientation and setting up a fallback i
  - [Background Tilt](https://pzp1997.github.io/Processing-Mobile/examples/bg-tilt)
  - [Easing](https://pzp1997.github.io/Processing-Mobile/examples/easing)
  - [Multitouch](https://pzp1997.github.io/Processing-Mobile/examples/multitouch)
- - [THE-SUN](https://pzp1997.github.io/Processing-Mobile/examples/)
+ - [THE-SUN](https://pzp1997.github.io/Processing-Mobile/examples/sun)
    - Based off [eveka's code](https://github.com/eveka/the-sun)
 
 ## Bug Reports? Improvements?
