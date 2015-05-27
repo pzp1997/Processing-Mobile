@@ -5,7 +5,7 @@
 ## Getting Started
 
 ### Short answer:
-Just add ``<script src="http://pzp1997.github.io/cdn/processing-mobile/processing-mobile-1.0.0.js"></script>`` to the bottom of the ``<body>`` in your index.html!
+Just add ``<script src="https://cdn.rawgit.com/pzp1997/cdn/gh-pages/processing-mobile/processing-mobile-1.0.0.js"></script>`` to the bottom of the ``<body>`` in your index.html!
 
 ### Long answer:
 **Making the HTML file**
