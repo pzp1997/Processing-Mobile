@@ -5,7 +5,7 @@ float pageX, pageY;
 
 void setup() {
   size(displayWidth, displayHeight);
-  fill(#ffffff);
+  fill(255, 100);
   noStroke();
 }
 
@@ -13,7 +13,7 @@ void draw() {
   pageX = touch ? touchX : mouseX;
   pageY = touch ? touchY : mouseY;
 
-  background(#444444);
+  background(60);
   ellipse(x, y, DIAM, DIAM);
   x += (pageX - x) * EASING;
   y += (pageY - y) * EASING;
