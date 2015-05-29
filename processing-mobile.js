@@ -29,24 +29,20 @@ canvasElem.addEventListener("touchstart", function (event) {
   touchX = event.changedTouches[0].pageX;
   touchY = event.changedTouches[0].pageY;
   touch = true;
-  processingFunc(touchStart, Processing.getInstanceById("sketch")); // Lets user define their own handler
 }, false);
 
 canvasElem.addEventListener("touchmove", function (event) {
   touchHandler(event);
   touchX = event.changedTouches[0].pageX;
   touchY = event.changedTouches[0].pageY;
-  processingFunc(touchMove, Processing.getInstanceById("sketch"));
 }, false);
 
 canvasElem.addEventListener("touchend", function (event) {
   touchHandler(event);
-  processingFunc(touchEnd, Processing.getInstanceById("sketch"));
 }, false);
 
 canvasElem.addEventListener("touchcancel", function (event) {
   touchHandler(event);
-  processingFunc(touchCancel, Processing.getInstanceById("sketch"));
 }, false);
 
 // Exposes DeviceOrientationEvents to Processing via tiltX, tiltY, and tiltZ (values of 0-360)
@@ -56,14 +52,8 @@ var tiltZ = 0;
 var tilt = false;
 
 window.addEventListener("deviceorientation", function (event) {
-  tiltX = event.beta + 180; // default value from -180 to 180; normalize to 0 to 360
-  tiltY = event.gamma*2 + 180; // default value from -90 to 90; normalize to 0 to 360
+  tiltX = event.beta; // default value from -180 to 180; normalize to 0 to 360
+  tiltY = event.gamma; // default value from -90 to 90; normalize to 0 to 360
   tiltZ = event.alpha; // default value from 0 to 360; no normalization needed
   tilt = true;
-  processingFunc(deviceOrientation, Processing.getInstanceById("sketch"));
 }, false);
-
-// Helper functions
-var processingFunc = function (name, instance) {
-  return instance.name();
-};
