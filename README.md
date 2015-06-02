@@ -5,7 +5,7 @@
 ## Getting Started
 
 ### Short answer:
-Just add ``<script src="https://cdn.rawgit.com/pzp1997/cdn/gh-pages/processing-mobile/processing-mobile-1.0.0.js"></script>`` to the bottom of the ``<body>`` in your index.html!
+Just add ``<script src="https://pzp1997.github.io/cdn/processing-mobile/1.0.1/processing-mobile.min.js"></script>`` to the bottom of the ``<body>`` in your index.html!
 
 ### Long answer:
 **Making the HTML file**
@@ -45,7 +45,7 @@ value: ``0`` to ``height``<br>
 y-coordinate of the last touch.
 
 ###### ``touches``
-type ``array``<br>
+type: ``array``<br>
 Each object in the array has the following properties:<br>
  - ``x``<br>
     type: ``float``<br>
