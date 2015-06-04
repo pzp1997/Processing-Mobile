@@ -20,18 +20,97 @@
 
     <section class="main-content">
       <h2>
-<a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting Started</h2>
+<a id="about" class="anchor" href="#about" aria-hidden="true"><span class="octicon octicon-link"></span></a>About</h2>
+
+<p>Have you ever written an awesome <a href="https://processing.org/">Processing</a> program that you wish you could use on your phone? Or did you create a great game that would be me so much more fun with a touch screen?</p>
+
+<p><strong><em>Yes!</em></strong></p>
+
+<p>Were you frustrated by Processing or Processing.js's lack of support for mobile devices?</p>
+
+<p><strong><em>Yes!</em></strong></p>
+
+<p>Well then today is your lucky day! Processing Mobile makes it easy to add support for mobile devices to your Processing code.</p>
+
+<ul>
+<li>In as little as five minutes, you can write your first Processing Mobile program.</li>
+<li>With naturally named variables, Processing Mobile's syntax is so similar to Processing that you'll forget you are even using it.</li>
+<li>Designed with beginners in mind, Processing Mobile has a very mild learning curve.</li>
+</ul>
+
+<h2>
+<a id="your-first-processing-mobile-program" class="anchor" href="#your-first-processing-mobile-program" aria-hidden="true"><span class="octicon octicon-link"></span></a>Your First Processing Mobile Program</h2>
+
+<p>Let's make a simple painting app...</p>
+
+<pre><code>void setup() {
+  size(displayWidth, displayHeight);
+  background(255);
+  fill(0);
+  noStroke();
+}
+
+void draw() {
+  if (mousePressed) {
+    ellipse(mouseX, mouseY, 10, 10);
+  }
+}
+</code></pre>
+
+<p>Let's add an <code>if...else</code> statement to <code>draw()</code> so that we can control what happens when a device has a touchscreen and set up a fallback for when it doesn't have one. We'll leave the <code>if</code> blank for now, and in the <code>else</code>, we'll paste our old <code>draw()</code></p>
+
+<pre><code>void draw() {
+  if (touch) {
+
+  } else {
+    if (mousePressed) {
+      ellipse(mouseX, mouseY, 10, 10);
+    }
+  }
+}
+</code></pre>
+
+<p>Now let's fill in that <code>if</code> with the following line of code:</p>
+
+<pre><code>ellipse(touchX, touchY, 10, 10);
+</code></pre>
+
+<p>Looks familiar, right? That's the same code that we used to draw our ellipse in the original version of our code, aside from changing <code>mouseX</code> and <code>mouseY</code> to <code>touchX</code> and <code>touchY</code>. All together, our code now looks like this:</p>
+
+<pre><code>void setup() {
+  size(displayWidth, displayHeight);
+  background(255);
+  fill(0);
+  noStroke();
+}
+
+void draw() {
+  if (touch) {
+    ellipse(touchX, touchY, 10, 10);
+  } else {
+    if (mousePressed) {
+      ellipse(mouseX, mouseY, 10, 10);
+    }
+  }
+}
+</code></pre>
+
+<p>And that's all folks. Congratulations on writing your first Processing Mobile program! But this code won't run in the Processing IDE (you'll probably get an error like <code>Cannot find anything named "touch"</code>). So how do you run it, you ask? Continue to Using Processing Mobile to find out.</p>
+
+<h2>
+<a id="using-processing-mobile" class="anchor" href="#using-processing-mobile" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using Processing Mobile</h2>
 
 <h3>
 <a id="short-answer" class="anchor" href="#short-answer" aria-hidden="true"><span class="octicon octicon-link"></span></a>Short answer:</h3>
 
-<p>Just add <code>&lt;script src="https://cdn.rawgit.com/pzp1997/cdn/gh-pages/processing-mobile/processing-mobile-1.0.0.js"&gt;&lt;/script&gt;</code> to the bottom of the <code>&lt;body&gt;</code> in your index.html!</p>
+<p>Just add <code>&lt;script src="https://pzp1997.github.io/cdn/processing-mobile/1.0.1/processing-mobile.min.js"&gt;&lt;/script&gt;</code> to the bottom of the <code>&lt;body&gt;</code> in your index.html!</p>
 
 <h3>
 <a id="long-answer" class="anchor" href="#long-answer" aria-hidden="true"><span class="octicon octicon-link"></span></a>Long answer:</h3>
 
-<p><a href="https://www.youtube.com/watch?v=vjK7U9gMKGI"><img src="http://img.youtube.com/vi/vjK7U9gMKGI/0.jpg" alt="Video Tutorial"></a><br>
-<strong>Making the HTML file</strong></p>
+<p><a href="https://www.youtube.com/watch?v=vjK7U9gMKGI"><strong>Video  Tutorial</strong></a><br> <a href="https://www.youtube.com/watch?v=vjK7U9gMKGI"><img src="http://img.youtube.com/vi/vjK7U9gMKGI/0.jpg" alt=""></a><br></p>
+
+<p><strong>Making the HTML file</strong></p>
 
 <ol>
 <li>Copy and paste the <a href="https://gist.github.com/pzp1997/958e15fe7bf048de0b10">HTML Template</a> into your favorite text editor. (If you do not have a text editor, I strongly recommend <a href="https://atom.io">Atom</a>).</li>
@@ -50,7 +129,7 @@
 <li>Click <strong>Advanced</strong> in the bottom right corner of the sharing box.</li>
 <li>Click <strong>Change...</strong>.</li>
 <li>Choose <strong>On - Public on the web</strong> and click <strong>Save</strong>.</li>
-<li>Before closing the sharing box, copy the document ID from the URL in the field below "Link to share". The document ID is a string of uppercase and lowercase letters and numbers between slashes in the URL.</li>
+<li>Before closing the sharing box, copy the document ID from the URL in the field below "Link to share". The document ID is a string of uppercase and lowercase letters and numbers between slashes in the URL. For example: "https://drive.google.com/file/d/<strong>0B5_nVTEmLd-cNzFfUi1YNlVFdm8</strong>/view?usp=sharing".</li>
 <li>You can now access your sketch at <code>www.googledrive.com/host/[doc id]</code> where <code>[doc id]</code> is the document ID you copied in Step 8.</li>
 </ol>
 
@@ -64,6 +143,26 @@
 </ol>
 
 <h2>
+<a id="examples" class="anchor" href="#examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Examples</h2>
+
+<ul>
+<li>
+<a href="examples/bg-tilt">Background Tilt</a> (<a href="examples/bg-tilt/bg-tilt.pde">source</a>)</li>
+<li>
+<a href="examples/easing">Easing</a> (<a href="examples/easing/easing.pde">source</a>)</li>
+<li>
+<a href="examples/multitouch">Multitouch</a> (<a href="examples/multitouch/multitouch.pde">source</a>)</li>
+<li>
+<a href="examples/sun">THE-SUN</a> (<a href="examples/sun/sun.pde">source</a>)
+
+<ul>
+<li>Based off <a href="https://github.com/eveka/the-sun">eveka's code</a>
+</li>
+</ul>
+</li>
+</ul>
+
+<h2>
 <a id="documentation" class="anchor" href="#documentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Documentation</h2>
 
 <h3>
@@ -74,24 +173,19 @@
 <a id="touchx" class="anchor" href="#touchx" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>touchX</code>
 </h6>
 
-<p>type: <code>float</code><br>
-value: <code>0</code> to <code>width</code><br>
-x-coordinate of the last touch.</p>
+<p>type: <code>float</code><br> value: <code>0</code> to <code>width</code><br> x-coordinate of the last touch.</p>
 
 <h6>
 <a id="touchy" class="anchor" href="#touchy" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>touchY</code>
 </h6>
 
-<p>type: <code>float</code><br>
-value: <code>0</code> to <code>height</code><br>
-y-coordinate of the last touch.</p>
+<p>type: <code>float</code><br> value: <code>0</code> to <code>height</code><br> y-coordinate of the last touch.</p>
 
 <h6>
 <a id="touches" class="anchor" href="#touches" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>touches</code>
 </h6>
 
-<p>type <code>array</code><br>
-Each object in the array has the following properties:<br></p>
+<p>type: <code>array</code><br> Each object in the array has the following properties:<br></p>
 
 <ul>
 <li>
@@ -116,9 +210,7 @@ Unique id of the touch. Allows one to track a specific finger while it is on the
 <a id="touch" class="anchor" href="#touch" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>touch</code>
 </h6>
 
-<p>type: <code>boolean</code><br>
-value: <code>false</code> until the first Touch Event, <code>true</code> after that.<br>
-Useful for checking if a device supports touch and setting up a fallback if it does not.</p>
+<p>type: <code>boolean</code><br> value: <code>false</code> until the first Touch Event, <code>true</code> after that.<br> Useful for checking if a device supports touch and setting up a fallback if it does not. <br><br><br> <strong>NOTE</strong>: There is no(t yet an) equivalent for the mouse event handlers (i.e. <code>mousePressed()</code>, <code>mouseDragged()</code>, etc.). One possible workaround is to check the <code>length</code> of the <code>touches</code> array in <code>draw()</code>.</p>
 
 <h3>
 <a id="device-orientation" class="anchor" href="#device-orientation" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://developer.mozilla.org/en-US/docs/Web/API/Detecting_device_orientation">Device Orientation</a>
@@ -128,58 +220,32 @@ Useful for checking if a device supports touch and setting up a fallback if it d
 <a id="tiltx" class="anchor" href="#tiltx" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>tiltX</code>
 </h6>
 
-<p>type: <code>float</code><br>
-value: <code>0</code> to <code>360</code><br>
-Rotation about the x-axis.</p>
+<p>type: <code>float</code><br> value: <code>0</code> to <code>360</code><br> Rotation about the x-axis.</p>
 
 <h6>
 <a id="tilty" class="anchor" href="#tilty" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>tiltY</code>
 </h6>
 
-<p>type: <code>float</code><br>
-value: <code>0</code> to <code>360</code><br>
-Rotation about the y-axis.</p>
+<p>type: <code>float</code><br> value: <code>0</code> to <code>360</code><br> Rotation about the y-axis.</p>
 
 <h6>
 <a id="tiltz" class="anchor" href="#tiltz" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>tiltZ</code>
 </h6>
 
-<p>type: <code>float</code><br>
-value: <code>0</code> to <code>360</code><br>
-Rotation about the z-axis.</p>
+<p>type: <code>float</code><br> value: <code>0</code> to <code>360</code><br> Rotation about the z-axis.</p>
 
 <h6>
 <a id="tilt" class="anchor" href="#tilt" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>tilt</code>
 </h6>
 
-<p>type: <code>boolean</code><br>
-value: <code>false</code> until the first Device Orientation Event, <code>true</code> after that.<br>
-Useful for checking if a device supports orientation and setting up a fallback if it does not.</p>
+<p>type: <code>boolean</code><br> value: <code>false</code> until the first Device Orientation Event, <code>true</code> after that.<br> Useful for checking if a device supports orientation and setting up a fallback if it does not.</p>
 
-<h2>
-<a id="examples" class="anchor" href="#examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Examples</h2>
 
-<ul>
-<li>
-<a href="examples/bg-tilt">Background Tilt</a> (<a href="examples/bg-tilt/bg-tilt.pde">source</a>)</li>
-<li>
-<a href="examples/easing">Easing</a> (<a href="examples/easing/easing.pde">source</a>)</li>
-<li>
-<a href="examples/multitouch">Multitouch</a> (<a href="examples/multitouch/multitouch.pde">source</a>)</li>
-<li>
-<a href="examples/sun">THE-SUN</a> (<a href="examples/sun/sun.pde">source</a>)
-
-<ul>
-<li>Based off <a href="https://github.com/eveka/the-sun">eveka's code</a>
-</li>
-</ul>
-</li>
-</ul>
 
 <h2>
 <a id="bug-reports-improvements" class="anchor" href="#bug-reports-improvements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bug Reports? Improvements?</h2>
 
-<p>Open a <a href="https://github.com/pzp1997/ProcessingJS-Touch/issues/new">New Issue</a> on the GitHub repository. Make sure the report has a detailed description of the bug, including how it can be reproduced.</p>
+<p>Open a <a href="https://github.com/pzp1997/Processing-Mobile/issues/new">New Issue</a> on the GitHub repository. Make sure the report has a detailed description of the bug, including how it can be reproduced.</p>
 
 <p><code>||</code></p>
 
