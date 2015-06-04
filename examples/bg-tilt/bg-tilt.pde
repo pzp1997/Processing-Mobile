@@ -12,7 +12,7 @@ void draw() {
     tiltZ = abs((tiltZ < 180) ? tiltZ : 360 - tiltZ);
 
     background(tiltX, tiltY, tiltZ);
-    text("tiltX: " + tiltX + "\ntiltY: " + tiltY + "\ntiltZ: " + tiltZ, width/2, height/2);
+    text("tiltX: " + round(tiltX) + "\ntiltY: " + round(tiltY) + "\ntiltZ: " + round(tiltZ), width/2, height/2);
   } else {
     background(60);
     text("Tilt not supported on this device.", width/2, height/2);

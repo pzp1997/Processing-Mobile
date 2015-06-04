@@ -1,19 +1,21 @@
 float x, y;
 final float EASING = 0.05;
-final float DIAM = 60;
+final float DIAM;
 float pageX, pageY;
 
 void setup() {
   size(displayWidth, displayHeight);
-  fill(255, 100);
+  fill(255);
   noStroke();
+
+  DIAM = (width < height) ? width/8 : height/8;
 }
 
 void draw() {
   pageX = touch ? touchX : mouseX;
   pageY = touch ? touchY : mouseY;
 
-  background(60);
+  background(0, 170);
   ellipse(x, y, DIAM, DIAM);
   x += (pageX - x) * EASING;
   y += (pageY - y) * EASING;
