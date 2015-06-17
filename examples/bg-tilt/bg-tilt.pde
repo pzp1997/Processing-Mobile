@@ -6,7 +6,7 @@ void setup() {
 }
 
 void draw() {
-  if (tilt) {
+  if (tiltSupport) {
     tiltX = abs((tiltX < 180) ? tiltX : 360 - tiltX);
     tiltY = abs((tiltY < 180) ? tiltY : 360 - tiltY);
     tiltZ = abs((tiltZ < 180) ? tiltZ : 360 - tiltZ);

@@ -1,18 +1,26 @@
+var canvasElem;
+var displayWidth, displayHeight;
+var touchX, touchY, ptouchX, ptouchY, touches, touchSupport;
+var tiltX, tiltY, tiltZ, ptiltX, ptiltY, ptiltZ, tiltSupport;
+var ambientLight, ambientLightSupport;
+var proximity, proximityMax, proximityMin, proximityNear, proximitySupport;
+
 // Get object with access to Processing vars and <canvas> element
-var canvasElem = document.getElementById("sketch");
+canvasElem = document.getElementById("sketch");
 
 // Defines some default Processing variables in JavaScript
-var displayWidth = window.innerWidth;
-var displayHeight = window.innerHeight;
+displayWidth = window.innerWidth;
+displayHeight = window.innerHeight;
 
-// Exposes TouchEvents to Processing via touchX, touchY and touches
-var touchX = 0; // float of the x coordinate of last touch
-var touchY = 0; // float of the y coordinate of last touch
-var touches = []; // list of touch objects with attributes x, y, and id
-var touch = false; // boolean value stating whether or not a touch event has occured. useful for checking if device supports touch
+// Exposes TouchEvents via touchX, touchY and touches
+touchX = 0; // float of the x coordinate of last touch
+touchY = 0; // float of the y coordinate of last touch
+touches = []; // list of touch objects with attributes x, y, and id
+touchSupport = false; // boolean value stating whether or not a touch event has occured. useful for checking if device supports touch
 
 var touchHandler = function(event) {
   event.preventDefault(); // overrides default browser behavior (i.e. scrolling and zooming)
+
   touches = [];
   for (var i = 0; i < event.touches.length; i++) {
     touch = event.touches[i];
@@ -25,35 +33,68 @@ var touchHandler = function(event) {
 };
 
 canvasElem.addEventListener("touchstart", function(event) {
-  touchHandler(event); // Pass the event to touchHandler to make touches array
+  touchHandler(event);
+  ptouchX = touchX;
+  ptouchY = touchY;
   touchX = event.changedTouches[0].pageX;
   touchY = event.changedTouches[0].pageY;
-  touch = true;
+  touchSupport = true;
 }, false);
 
 canvasElem.addEventListener("touchmove", function(event) {
   touchHandler(event);
+  ptouchX = touchX;
+  ptouchY = touchY;
   touchX = event.changedTouches[0].pageX;
   touchY = event.changedTouches[0].pageY;
 }, false);
 
-canvasElem.addEventListener("touchend", function(event) {
-  touchHandler(event);
-}, false);
+canvasElem.addEventListener("touchend", touchHandler, false);
+canvasElem.addEventListener("touchcancel", touchHandler, false);
 
-canvasElem.addEventListener("touchcancel", function(event) {
-  touchHandler(event);
-}, false);
-
-// Exposes DeviceOrientationEvents to Processing via tiltX, tiltY, and tiltZ (values of 0-360)
-var tiltX = 0;
-var tiltY = 0;
-var tiltZ = 0;
-var tilt = false;
+// Exposes DeviceOrientationEvents via tiltX, tiltY, and tiltZ
+tiltX = 0;
+tiltY = 0;
+tiltZ = 0;
+ptiltX = 0;
+ptiltY = 0;
+ptiltZ = 0;
+tiltSupport = false;
 
 window.addEventListener("deviceorientation", function(event) {
-  tiltX = event.beta; // default value from -180 to 180; normalize to 0 to 360
-  tiltY = event.gamma; // default value from -90 to 90; normalize to 0 to 360
-  tiltZ = event.alpha; // default value from 0 to 360; no normalization needed
-  tilt = true;
+  ptiltX = tiltX;
+  ptiltY = tiltY;
+  ptiltZ = tiltZ;
+  tiltX = event.beta; // default value from -180 to 180;
+  tiltY = event.gamma; // default value from -90 to 90;
+  tiltZ = event.alpha; // default value from 0 to 360;
+  tiltSupport = true;
+}, false);
+
+// Exposes LightEvents (ambient light sensor) via ambientLight
+ambientLight = 0; // unit is lux
+ambientLightSupport = false;
+
+window.addEventListener("devicelight", function(event) {
+  ambientLight = event.value;
+  ambientLightSupport = true;
+}, false);
+
+// Exposes ProximityEvents via proximity, proximityNear
+proximity = 0;
+proximityMax = 0;
+proximityMin = 0;
+proximityNear = false;
+proximitySupport = false;
+
+window.addEventListener("deviceproximity", function(event) {
+  proximity = event.value;
+  proximityMax = event.max;
+  proximityMin = event.min;
+  proximitySupport = true;
+}, false);
+
+window.addEventListener("userproximity", function(event) {
+  proximityNear = event.near;
+  proximitySupport = true;
 }, false);
