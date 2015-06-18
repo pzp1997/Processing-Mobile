@@ -46,33 +46,30 @@
 <pre><code>void setup() {
   size(displayWidth, displayHeight);
   background(255);
-  fill(0);
-  noStroke();
+  strokeWeight(5);
 }
 
 void draw() {
-  if (mousePressed) {
-    ellipse(mouseX, mouseY, 10, 10);
-  }
+  line(mouseX, mouseY, pmouseX, pmouseY);
 }
 </code></pre>
+
+<p>Now, this works great on a computer, but if we were to try it on a mobile device, we would see that tapping does nothing. We're going to edit this program a little bit to prepare it for mobile.</p>
 
 <p>Let's add an <code>if...else</code> statement to <code>draw()</code> so that we can control what happens when a device has a touchscreen and set up a fallback for when it doesn't have one. We'll leave the <code>if</code> blank for now, and in the <code>else</code>, we'll paste our old <code>draw()</code></p>
 
 <pre><code>void draw() {
-  if (touch) {
+  if (touchSupport) {
 
   } else {
-    if (mousePressed) {
-      ellipse(mouseX, mouseY, 10, 10);
-    }
+    line(mouseX, mouseY, pmouseX, pmouseY);
   }
 }
 </code></pre>
 
 <p>Now let's fill in that <code>if</code> with the following line of code:</p>
 
-<pre><code>ellipse(touchX, touchY, 10, 10);
+<pre><code>line(touchX, touchY, ptouchX, ptouchY);
 </code></pre>
 
 <p>Looks familiar, right? That's the same code that we used to draw our ellipse in the original version of our code, aside from changing <code>mouseX</code> and <code>mouseY</code> to <code>touchX</code> and <code>touchY</code>. All together, our code now looks like this:</p>
@@ -80,22 +77,19 @@ void draw() {
 <pre><code>void setup() {
   size(displayWidth, displayHeight);
   background(255);
-  fill(0);
-  noStroke();
+  strokeWeight(5);
 }
 
 void draw() {
-  if (touch) {
-    ellipse(touchX, touchY, 10, 10);
+  if (touchSupport) {
+    line(touchX, touchY, ptouchX, ptouchY);
   } else {
-    if (mousePressed) {
-      ellipse(mouseX, mouseY, 10, 10);
-    }
+    line(mouseX, mouseY, pmouseX, pmouseY);
   }
 }
 </code></pre>
 
-<p>And that's all folks. Congratulations on writing your first Processing Mobile program! But this code won't run in the Processing IDE (you'll probably get an error like <code>Cannot find anything named "touch"</code>). So how do you run it, you ask? Continue to Using Processing Mobile to find out.</p>
+<p>And that's all folks. Congratulations on writing your first Processing Mobile program! But this code won't run in the Processing IDE (you'll probably get an error like <code>Cannot find anything named "touchSupport"</code>). So how do you run it, you ask? Continue to Using Processing Mobile to find out.</p>
 
 <h2>
 <a id="using-processing-mobile" class="anchor" href="#using-processing-mobile" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using Processing Mobile</h2>
@@ -125,11 +119,11 @@ void draw() {
 <li>Go to <a href="https://drive.google.com">Google Drive</a>.</li>
 <li>Click on the <strong>New</strong> button on the left.</li>
 <li>Click on <strong>File Upload</strong> from the dropdown menu and choose the file you saved in Step 4 of Making the HTML file.</li>
-<li>Wait for the upload to complete, then click on the <strong>Share</strong> link in the bottom left.</li>
+<li>Wait for the upload to complete, then click on the <strong>Share</strong> link at the bottom right of the screen.</li>
 <li>Click <strong>Advanced</strong> in the bottom right corner of the sharing box.</li>
 <li>Click <strong>Change...</strong>.</li>
 <li>Choose <strong>On - Public on the web</strong> and click <strong>Save</strong>.</li>
-<li>Before closing the sharing box, copy the document ID from the URL in the field below "Link to share". The document ID is a string of uppercase and lowercase letters and numbers between slashes in the URL. For example: "https://drive.google.com/file/d/<strong>0B5_nVTEmLd-cNzFfUi1YNlVFdm8</strong>/view?usp=sharing".</li>
+<li>Before closing the sharing box, copy the document ID from the URL in the field below "Link to share". To do this, copy the entire link and paste it into the address bar, then copy the string of uppercase and lowercase letters and numbers between slashes in the URL. For example: "https://drive.google.com/file/d/<strong>0B5_nVTEmLd-cNzFfUi1YNlVFdm8</strong>/view?usp=sharing".</li>
 <li>You can now access your sketch at <code>www.googledrive.com/host/[doc id]</code> where <code>[doc id]</code> is the document ID you copied in Step 8.</li>
 </ol>
 
@@ -147,17 +141,52 @@ void draw() {
 
 <ul>
 <li>
-<a href="examples/bg-tilt">Background Tilt</a> (<a href="examples/bg-tilt/bg-tilt.pde">source</a>)</li>
+<a href="examples/easing">Easing</a> (<a href="examples/easing/easing.pde">source</a>)
+
+<ul>
+<li>Circle follows your finger using touch events.</li>
+</ul>
+</li>
 <li>
-<a href="examples/easing">Easing</a> (<a href="examples/easing/easing.pde">source</a>)</li>
+<a href="examples/multiline">MultiLine</a> (<a href="examples/multiline/multiline.pde">source</a>)
+
+<ul>
+<li>Uses multitouch to draw lines between all of your fingers.</li>
+</ul>
+</li>
 <li>
-<a href="examples/multitouch">Multitouch</a> (<a href="examples/multitouch/multitouch.pde">source</a>)</li>
+<a href="examples/multitouch">Multitouch</a> (<a href="examples/multitouch/multitouch.pde">source</a>)
+
+<ul>
+<li>Demonstration of how to track individual touches when using multitouch.</li>
+</ul>
+</li>
+<li>
+<a href="examples/bg-tilt">Background Tilt</a> (<a href="examples/bg-tilt/bg-tilt.pde">source</a>)
+
+<ul>
+<li>Uses tilt to set the background color.</li>
+</ul>
+</li>
+<li>
+<a href="examples/etch-a-sketch">Etch A Sketch</a> (<a href="examples/etch-a-sketch/etch-a-sketch.pde">source</a>)
+
+<ul>
+<li>The classic toy controlled by tilt.</li>
+</ul>
+</li>
+<li>
+<a href="examples/maze">Maze</a> (<a href="examples/maze/maze.pde">source</a>)
+
+<ul>
+<li>Beginnings of a maze game. Ball is positioned based on tilt.</li>
+</ul>
+</li>
 <li>
 <a href="examples/sun">THE-SUN</a> (<a href="examples/sun/sun.pde">source</a>)
 
 <ul>
-<li>Based off <a href="https://github.com/eveka/the-sun">eveka's code</a>
-</li>
+<li>Based off <a href="https://github.com/eveka/the-sun">eveka's code</a>.</li>
 </ul>
 </li>
 </ul>
@@ -180,6 +209,18 @@ void draw() {
 </h6>
 
 <p>type: <code>float</code><br> value: <code>0</code> to <code>height</code><br> y-coordinate of the last touch.</p>
+
+<h6>
+<a id="ptouchx" class="anchor" href="#ptouchx" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>ptouchX</code>
+</h6>
+
+<p>type: <code>float</code><br> value: <code>0</code> to <code>width</code><br> x-coordinate of the touch prior to the last touch.</p>
+
+<h6>
+<a id="ptouchy" class="anchor" href="#ptouchy" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>ptouchY</code>
+</h6>
+
+<p>type: <code>float</code><br> value: <code>0</code> to <code>height</code><br> y-coordinate of the touch prior to the last touch.</p>
 
 <h6>
 <a id="touches" class="anchor" href="#touches" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>touches</code>
@@ -207,7 +248,7 @@ Unique id of the touch. Allows one to track a specific finger while it is on the
 </ul>
 
 <h6>
-<a id="touch" class="anchor" href="#touch" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>touch</code>
+<a id="touchsupport" class="anchor" href="#touchsupport" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>touchSupport</code>
 </h6>
 
 <p>type: <code>boolean</code><br> value: <code>false</code> until the first Touch Event, <code>true</code> after that.<br> Useful for checking if a device supports touch and setting up a fallback if it does not. <br><br><br> <strong>NOTE</strong>: There is no(t yet an) equivalent for the mouse event handlers (i.e. <code>mousePressed()</code>, <code>mouseDragged()</code>, etc.). One possible workaround is to check the <code>length</code> of the <code>touches</code> array in <code>draw()</code>.</p>
@@ -220,13 +261,13 @@ Unique id of the touch. Allows one to track a specific finger while it is on the
 <a id="tiltx" class="anchor" href="#tiltx" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>tiltX</code>
 </h6>
 
-<p>type: <code>float</code><br> value: <code>0</code> to <code>360</code><br> Rotation about the x-axis.</p>
+<p>type: <code>float</code><br> value: <code>-180</code> to <code>180</code><br> Rotation about the x-axis.</p>
 
 <h6>
 <a id="tilty" class="anchor" href="#tilty" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>tiltY</code>
 </h6>
 
-<p>type: <code>float</code><br> value: <code>0</code> to <code>360</code><br> Rotation about the y-axis.</p>
+<p>type: <code>float</code><br> value: <code>-90</code> to <code>90</code><br> Rotation about the y-axis.</p>
 
 <h6>
 <a id="tiltz" class="anchor" href="#tiltz" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>tiltZ</code>
@@ -235,7 +276,25 @@ Unique id of the touch. Allows one to track a specific finger while it is on the
 <p>type: <code>float</code><br> value: <code>0</code> to <code>360</code><br> Rotation about the z-axis.</p>
 
 <h6>
-<a id="tilt" class="anchor" href="#tilt" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>tilt</code>
+<a id="ptiltx" class="anchor" href="#ptiltx" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>ptiltX</code>
+</h6>
+
+<p>type: <code>float</code><br> value: <code>-180</code> to <code>180</code><br> Rotation about the x-axis in the frame prior to the current frame.</p>
+
+<h6>
+<a id="ptilty" class="anchor" href="#ptilty" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>ptiltY</code>
+</h6>
+
+<p>type: <code>float</code><br> value: <code>-90</code> to <code>90</code><br> Rotation about the y-axis in the frame prior to the current frame.</p>
+
+<h6>
+<a id="ptiltz" class="anchor" href="#ptiltz" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>ptiltZ</code>
+</h6>
+
+<p>type: <code>float</code><br> value: <code>0</code> to <code>360</code><br> Rotation about the z-axis in the frame prior to the current frame.</p>
+
+<h6>
+<a id="tiltsupport" class="anchor" href="#tiltsupport" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>tiltSupport</code>
 </h6>
 
 <p>type: <code>boolean</code><br> value: <code>false</code> until the first Device Orientation Event, <code>true</code> after that.<br> Useful for checking if a device supports orientation and setting up a fallback if it does not.</p>
