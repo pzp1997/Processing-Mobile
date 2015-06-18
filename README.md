@@ -23,27 +23,23 @@ Let's make a simple painting app...
 void setup() {
   size(displayWidth, displayHeight);
   background(255);
-  fill(0);
-  noStroke();
+  strokeWeight(5);
 }
 
 void draw() {
-  if (mousePressed) {
-    ellipse(mouseX, mouseY, 10, 10);
-  }
+  line(mouseX, mouseY, pmouseX, pmouseY);
 }
 ```
+Now, this works great on a computer, but if we were to try it on a mobile device, we would see that tapping does nothing. We're going to edit this program a little bit to prepare it for mobile.
 
 Let's add an `if...else` statement to `draw()` so that we can control what happens when a device has a touchscreen and set up a fallback for when it doesn't have one. We'll leave the `if` blank for now, and in the `else`, we'll paste our old `draw()`
 
 ```
 void draw() {
-  if (touch) {
+  if (touchSupport) {
 
   } else {
-    if (mousePressed) {
-      ellipse(mouseX, mouseY, 10, 10);
-    }
+    line(mouseX, mouseY, pmouseX, pmouseY);
   }
 }
 ```
@@ -51,7 +47,7 @@ void draw() {
 Now let's fill in that `if` with the following line of code:
 
 ```
-ellipse(touchX, touchY, 10, 10);
+line(touchX, touchY, ptouchX, ptouchY);
 ```
 
 Looks familiar, right? That's the same code that we used to draw our ellipse in the original version of our code, aside from changing `mouseX` and `mouseY` to `touchX` and `touchY`. All together, our code now looks like this:
@@ -60,22 +56,19 @@ Looks familiar, right? That's the same code that we used to draw our ellipse in 
 void setup() {
   size(displayWidth, displayHeight);
   background(255);
-  fill(0);
-  noStroke();
+  strokeWeight(5);
 }
 
 void draw() {
-  if (touch) {
-    ellipse(touchX, touchY, 10, 10);
+  if (touchSupport) {
+    line(touchX, touchY, ptouchX, ptouchY);
   } else {
-    if (mousePressed) {
-      ellipse(mouseX, mouseY, 10, 10);
-    }
+    line(mouseX, mouseY, pmouseX, pmouseY);
   }
 }
 ```
 
-And that's all folks. Congratulations on writing your first Processing Mobile program! But this code won't run in the Processing IDE (you'll probably get an error like `Cannot find anything named "touch"`). So how do you run it, you ask? Continue to Using Processing Mobile to find out.
+And that's all folks. Congratulations on writing your first Processing Mobile program! But this code won't run in the Processing IDE (you'll probably get an error like `Cannot find anything named "touchSupport"`). So how do you run it, you ask? Continue to Using Processing Mobile to find out.
 
 ## Using Processing Mobile
 ### Short answer:
@@ -94,11 +87,11 @@ Just add `<script src="https://pzp1997.github.io/cdn/processing-mobile/1.0.1/pro
   1. Go to [Google Drive](https://drive.google.com).
   2. Click on the **New** button on the left.
   3. Click on **File Upload** from the dropdown menu and choose the file you saved in Step 4 of Making the HTML file.
-  4. Wait for the upload to complete, then click on the **Share** link in the bottom left.
+  4. Wait for the upload to complete, then click on the **Share** link at the bottom right of the screen.
   5. Click **Advanced** in the bottom right corner of the sharing box.
   6. Click **Change...**.
   7. Choose **On - Public on the web** and click **Save**.
-  8. Before closing the sharing box, copy the document ID from the URL in the field below "Link to share". The document ID is a string of uppercase and lowercase letters and numbers between slashes in the URL. For example: "https:<span></span>//drive.google.com/file/d/**0B5_nVTEmLd-cNzFfUi1YNlVFdm8**/view?usp=sharing".
+  8. Before closing the sharing box, copy the document ID from the URL in the field below "Link to share". To do this, copy the entire link and paste it into the address bar, then copy the string of uppercase and lowercase letters and numbers between slashes in the URL. For example: "https:<span></span>//drive.google.com/file/d/**0B5_nVTEmLd-cNzFfUi1YNlVFdm8**/view?usp=sharing".
   9. You can now access your sketch at `www.googledrive.com/host/[doc id]` where `[doc id]` is the document ID you copied in Step 8.
 
 **Shortening the URL (Optional)**
@@ -107,11 +100,20 @@ Just add `<script src="https://pzp1997.github.io/cdn/processing-mobile/1.0.1/pro
   3. Copy and share the shortened URL with your friends!
 
 ## Examples
- - [Background Tilt](https://pzp1997.github.io/Processing-Mobile/examples/bg-tilt)
- - [Easing](https://pzp1997.github.io/Processing-Mobile/examples/easing)
- - [Multitouch](https://pzp1997.github.io/Processing-Mobile/examples/multitouch)
- - [THE-SUN](https://pzp1997.github.io/Processing-Mobile/examples/sun)
-  - Based off [eveka's code](https://github.com/eveka/the-sun)
+  - [Easing](https://pzp1997.github.io/Processing-Mobile/examples/easing)
+    - Circle follows your finger using touch events.
+  - [MultiLine](http://pzp1997.github.io/Processing-Mobile/examples/multiline/)
+    - Uses multitouch to draw lines between all of your fingers.
+  - [Multitouch](https://pzp1997.github.io/Processing-Mobile/examples/multitouch)
+    - Demonstration of how to track individual touches when using multitouch.
+  - [Background Tilt](https://pzp1997.github.io/Processing-Mobile/examples/bg-tilt)
+    - Uses tilt to set the background color.
+  - [Etch A Sketch](http://pzp1997.github.io/Processing-Mobile/examples/etch-a-sketch/)
+    - The classic toy controlled by tilt.
+  - [Maze](http://pzp1997.github.io/Processing-Mobile/examples/maze/)
+    - Beginnings of a maze game. Ball is positioned based on tilt.
+  - [THE-SUN](https://pzp1997.github.io/Processing-Mobile/examples/sun)
+    - Based off [eveka's code](https://github.com/eveka/the-sun).
 
 ## Documentation
 ### [Touch Events](https://developer.mozilla.org/en-US/docs/Web/API/Touch_events)
@@ -120,6 +122,12 @@ type: `float`<br> value: `0` to `width`<br> x-coordinate of the last touch.
 
 ###### ``touchY``
 type: `float`<br> value: `0` to `height`<br> y-coordinate of the last touch.
+
+###### ``ptouchX``
+type: `float`<br> value: `0` to `width`<br> x-coordinate of the touch prior to the last touch.
+
+###### ``ptouchY``
+type: `float`<br> value: `0` to `height`<br> y-coordinate of the touch prior to the last touch.
 
 ###### ``touches``
 type: `array`<br> Each object in the array has the following properties:<br>
@@ -135,20 +143,29 @@ type: `array`<br> Each object in the array has the following properties:<br>
     type: `int`<br>
     Unique id of the touch. Allows one to track a specific finger while it is on the screen.
 
-###### ``touch``
+###### ``touchSupport``
 type: `boolean`<br> value: `false` until the first Touch Event, `true` after that.<br> Useful for checking if a device supports touch and setting up a fallback if it does not. <br><br><br> **NOTE**: There is no(t yet an) equivalent for the mouse event handlers (i.e. `mousePressed()`, `mouseDragged()`, etc.). One possible workaround is to check the `length` of the `touches` array in `draw()`.
 
 ### [Device Orientation](https://developer.mozilla.org/en-US/docs/Web/API/Detecting_device_orientation)
 ###### ``tiltX``
-type: `float`<br> value: `0` to `360`<br> Rotation about the x-axis.
+type: `float`<br> value: `-180` to `180`<br> Rotation about the x-axis.
 
 ###### ``tiltY``
-type: `float`<br> value: `0` to `360`<br> Rotation about the y-axis.
+type: `float`<br> value: `-90` to `90`<br> Rotation about the y-axis.
 
 ###### ``tiltZ``
 type: `float`<br> value: `0` to `360`<br> Rotation about the z-axis.
 
-###### ``tilt``
+###### ``ptiltX``
+type: `float`<br> value: `-180` to `180`<br> Rotation about the x-axis in the frame prior to the current frame.
+
+###### ``ptiltY``
+type: `float`<br> value: `-90` to `90`<br> Rotation about the y-axis in the frame prior to the current frame.
+
+###### ``ptiltZ``
+type: `float`<br> value: `0` to `360`<br> Rotation about the z-axis in the frame prior to the current frame.
+
+###### ``tiltSupport``
 type: `boolean`<br> value: `false` until the first Device Orientation Event, `true` after that.<br> Useful for checking if a device supports orientation and setting up a fallback if it does not.
 
 <!---
@@ -199,4 +216,3 @@ Just drop me a line at [pzpaul2002@yahoo.com](mailto:pzpaul2002@yahoo.com?subjec
 
 ## Authors
 [Palmer (pzp1997)](https://github.com/pzp1997)
-
