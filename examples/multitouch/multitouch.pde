@@ -1,14 +1,26 @@
+var touchColors = {};
+final float DIAM;
+
 void setup() {
   size(displayWidth, displayHeight);
-  fill(255);
   noStroke();
-  textSize(40);
-  textAlign(CENTER);
+
+  DIAM = (width < height) ? width/3 : height/3;
 }
 
 void draw() {
-  background(60);
+  background(255);
   for (int i = 0; i < touches.length; i++) {
-    ellipse(touches[i].x, touches[i].y, 100, 100);
+    var touch = touches[i];
+    if (!touchColors[touch.id]) {
+      touchColors[touch.id] = color(random(255), random(255), random(255), 127);
+    }
+    fill(touchColors[touch.id]);
+    ellipse(touches[i].x, touches[i].y, DIAM, DIAM);
+  }
+
+  // Garbage collector
+  if (touches.length == 0) {
+    touchColors = {};
   }
 }

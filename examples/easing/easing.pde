@@ -12,8 +12,8 @@ void setup() {
 }
 
 void draw() {
-  pageX = touch ? touchX : mouseX;
-  pageY = touch ? touchY : mouseY;
+  pageX = touchSupport ? touchX : mouseX;
+  pageY = touchSupport ? touchY : mouseY;
 
   background(0, 170);
   ellipse(x, y, DIAM, DIAM);
