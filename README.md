@@ -215,4 +215,4 @@ Fork this repository and submit a pull request with a fix.
 Just drop me a line at [pzpaul2002@yahoo.com](mailto:pzpaul2002@yahoo.com?subject=Processing%20Mobile%20Bug) with the subject "Processing Mobile Bug" and a detailed description of the bug, including how I can reproduce it.
 
 ## Authors
-[Palmer (pzp1997)](https://github.com/pzp1997)
+[Palmer Paul (pzp1997)](https://github.com/pzp1997)
